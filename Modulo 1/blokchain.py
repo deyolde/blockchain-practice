@@ -6,3 +6,5 @@ Created on Sun Jan  9 20:24:46 2022
 """
 
 # Módulo 1 - crear una cadena de bloques
+# Flask instalado
+# Postman instalado
