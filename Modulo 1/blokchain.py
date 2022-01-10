@@ -10,7 +10,7 @@ Created on Sun Jan  9 20:24:46 2022
 # Postman instalado
 
 # Importar las librerías
-import datetme
+import datetime
 import hashlib
 import json
 from flask import Flask, jsonify
@@ -19,12 +19,12 @@ from flask import Flask, jsonify
 class Blockchain:
     
     def __init__(self):
-        self.clain = []
+        self.chain = []
         self.create_block(proof = 1, previous_hash = '0')
         
     def create_block(self, proof, previous_hash):
         block = {'index' : len(self.chain)+1,
-                 'timestamp' : str(datetme.datetme.now()),
+                 'timestamp' : str(datetime.datetime.now()),
                  'proof' : proof,
                  'previous_hash'  : previous_hash}
         self.chain.append(block)
@@ -95,3 +95,6 @@ def get_chain():
                 'length' : len(blockchain.chain)
                 }
     return jsonify(response),200
+
+# Ejecución de la app
+app.run(host = '0.0.0.0', port = 5000)
