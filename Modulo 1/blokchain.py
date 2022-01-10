@@ -69,7 +69,7 @@ class Blockchain:
 # 1.- crear una aplicación web (webapp)
 app = Flask(__name__)
 # si se tiene un error 500 actualizar Flask, reiniciar Spyder y ejecutar
-#app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
 # 2.- crear una blockchain
 blockchain = Blockchain()
 
@@ -96,6 +96,16 @@ def get_chain():
                 'length' : len(blockchain.chain)
                 }
     return jsonify(response),200
+
+# Comprobar si la cadena de bloques es válida
+@app.route('/is_valid', methods = ['GET'])
+def is_valid():
+    is_valid = blockchain.is_chain_valid(blockchain.chain)
+    if is_valid:
+        response = {'message' : 'Todo correcto. La cadena de bloques es válida.'}
+    else:
+        response = {'message' : 'Houston, tenemos un problema. La cadena de bloques no es válida.'}
+    return jsonify(response), 200  
 
 # Ejecución de la app
 app.run(host = '0.0.0.0', port = 5000)
